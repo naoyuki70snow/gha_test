@@ -1,5 +1,5 @@
 name: Merge Develop To Release Branch
-run-name: Automatically merging develop to release branch :octocat:
+run-name: Automatically merging develop to release branch
 on:
   push:
     branches:
