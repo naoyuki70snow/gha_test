@@ -2,10 +2,13 @@ name: Merge Develop To Release Branch
 run-name: Automatically merging develop to release branch
 on:
   push:
+  pull_request:
+    types: [closed]
     branches:
-      - develop
+      - main
 jobs:
   merge-develop-to-release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
