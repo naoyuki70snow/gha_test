@@ -27,7 +27,7 @@ jobs:
         git checkout develop
         while read branch; do
           git checkout $branch
-          git merge --no-ff origin/develop
+          git merge --no-ff origin/develop || true
           if [[ $(git ls-files -u) ]]; then
             # マージをキャンセル
             git merge --abort
