@@ -7,17 +7,24 @@ on:
 jobs:
   merge-develop-to-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Check out repository code
       uses: actions/checkout@v4
+    - name: Set Git config
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "Github Actions"
     - name: Get target branches which names are release/*
       run: |
-          git fetch origin
+          git fetch --unshallow
           git branch -r | grep 'origin/release/' | sed 's/origin\///' > target_branches.txt
     - name: echo target branches
       run: cat target_branches.txt
     - name: Merge develop to release branch
       run: |
+        git checkout develop
         while read branch; do
           git checkout $branch
           git merge origin/develop
