@@ -18,6 +18,7 @@ jobs:
       run: cat target_branches.txt
     - name: Merge develop to release branch
       run: |
+        git checkout develop
         while read branch; do
           git checkout $branch
           git merge origin/develop
