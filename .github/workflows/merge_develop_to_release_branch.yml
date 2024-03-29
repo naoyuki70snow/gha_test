@@ -1,0 +1,25 @@
+name: Merge Develop To Release Branch
+run-name: Automatically merging develop to release branch
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  merge-develop-to-release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - name: Get target branches which names are release/*
+      run: |
+          git fetch origin
+          git branch -r | grep 'origin/release/' | sed 's/origin\///' > target_branches.txt
+    - name: echo target branches
+      run: cat target_branches.txt
+    - name: Merge develop to release branch
+      run: |
+        while read branch; do
+          git checkout $branch
+          git merge origin/develop
+          git push origin $branch
+        done < target_branches.txt
