@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: write
     env:
-      BRANCH_NAME: ${{ github.head_ref }}
+      BRANCH_NAME: ${{ github.base_ref }}
     steps:
     - name: echo branch name
       run: echo $BRANCH_NAME
