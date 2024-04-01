@@ -1,7 +1,6 @@
 name: Add Description To Release PR
 run-name: Automatically add description to release PR
 on:
-  push:
   pull_request:
     types: [closed]
     branches:
