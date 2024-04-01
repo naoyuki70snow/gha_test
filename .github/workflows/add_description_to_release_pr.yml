@@ -29,13 +29,13 @@ jobs:
     - name: Prepare description template
       run: |
         RELEASE_DATE=$(echo $BRANCH_NAME | sed -e 's/release\///')
-        echo "Release $RELEASE_DATE" > /tmp/description.md
-        echo "<% pull_requests.each do |pr| -%>" >> /tmp/description.md
-        echo "<%=  pr.to_checklist_item %>" >> /tmp/description.md
-        echo "<% end -%>" >> /tmp/description.md
+        echo "Release $RELEASE_DATE" > ./tmp/description.md
+        echo "<% pull_requests.each do |pr| -%>" >> ./tmp/description.md
+        echo "<%=  pr.to_checklist_item %>" >> ./tmp/description.md
+        echo "<% end -%>" >> //tmp/description.md
     - run: git-pr-release
       env:
         GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_PR_RELEASE_BRANCH_PRODUCTION: develop
         GIT_PR_RELEASE_BRANCH_STAGING: ${{ env.BRANCH_NAME }}
-        GIT_PR_RELEASE_TEMPLATE: /tmp/description.md
+        GIT_PR_RELEASE_TEMPLATE: tmp/description.md
