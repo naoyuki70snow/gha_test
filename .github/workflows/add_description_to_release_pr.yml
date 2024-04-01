@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      BRANCH_NAME: ${{ github.head_ref }}
     steps:
     - name: Check out repository code
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -23,7 +25,6 @@ jobs:
       run: gem install --no-document git-pr-release
     - name: Prepare description template
       run: |
-        BRANCH_NAME=${GITHUB_HEAD_REF}
         RELEASE_DATE=$(echo $BRANCH_NAME | sed -e 's/release\///')
         echo "Release $RELEASE_DATE" > /tmp/description.md
         echo "<% pull_requests.each do |pr| -%>" >> /tmp/description.md
@@ -33,5 +34,5 @@ jobs:
       env:
         GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_PR_RELEASE_BRANCH_PRODUCTION: develop
-        GIT_PR_RELEASE_BRANCH_STAGING: ${{ BRANCH_NAME }}
+        GIT_PR_RELEASE_BRANCH_STAGING: ${{ env.BRANCH_NAME }}
         GIT_PR_RELEASE_TEMPLATE: /tmp/description.md
