@@ -33,5 +33,5 @@ jobs:
       env:
         GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GIT_PR_RELEASE_BRANCH_PRODUCTION: develop
-        GIT_PR_RELEASE_BRANCH_STAGING: ${{ GITHUB_HEAD_REF }}
+        GIT_PR_RELEASE_BRANCH_STAGING: ${{ BRANCH_NAME }}
         GIT_PR_RELEASE_TEMPLATE: /tmp/description.md
