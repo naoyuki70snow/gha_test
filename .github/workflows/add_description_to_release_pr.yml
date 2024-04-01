@@ -3,10 +3,12 @@ run-name: Automatically add description to release PR
 on:
   push:
   pull_request:
+    types: [closed]
     branches:
       - release/*
 jobs:
   add-description-to-release-pr:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,9 +24,9 @@ jobs:
     - name: Setup ruby
       uses: ruby/setup-ruby@v1.173.0
       with:
-        ruby-version: 2.6.10
+        ruby-version: 3.1.0
     - name: Install git-pr-release
-      run: gem install --no-document git-pr-release
+      run: gem install --no-document git-pr-release -v "2.2.0"
     - name: Prepare description template
       run: |
         RELEASE_DATE=$(echo $BRANCH_NAME | sed -e 's/release\///')
