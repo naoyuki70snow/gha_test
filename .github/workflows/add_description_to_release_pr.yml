@@ -13,12 +13,14 @@ jobs:
     env:
       BRANCH_NAME: ${{ github.head_ref }}
     steps:
+    - name: echo branch name
+      run: echo $BRANCH_NAME
     - name: Check out repository code
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       with:
         fetch-depth: 0
     - name: Setup ruby
-      uses: actions/setup-ruby@e932e7af67fc4a8fc77bd86b744acd4e42fe3543 # v1
+      uses: actions/setup-ruby@v1.173.0
       with:
         ruby-version: 2.6
     - name: Install git-pr-release
