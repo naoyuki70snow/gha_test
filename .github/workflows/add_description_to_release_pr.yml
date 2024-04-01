@@ -17,11 +17,13 @@ jobs:
     - name: echo branch name
       run: echo $BRANCH_NAME
     - name: Check out repository code
-      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      # NOTE: https://github.com/actions/checkout/releases/tag/v4
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
         fetch-depth: 0
     - name: Setup ruby
-      uses: ruby/setup-ruby@v1.173.0
+      # NOTE: https://github.com/ruby/setup-ruby/releases/tag/v1.173.0
+      uses: ruby/setup-ruby@5f19ec79cedfadb78ab837f95b87734d0003c899
       with:
         ruby-version: 3.1.0
     - name: Install git-pr-release
