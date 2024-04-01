@@ -23,7 +23,7 @@ jobs:
       run: gem install --no-document git-pr-release
     - name: Prepare description template
       run: |
-        RELEASE_DATE=${{GITHUB_HEAD_REF##*/}}
+        RELEASE_DATE=${GITHUB_HEAD_REF##*/}
         echo "Release $RELEASE_DATE" > /tmp/description.md
         echo "<% pull_requests.each do |pr| -%>" >> /tmp/description.md
         echo "<%=  pr.to_checklist_item %>" >> /tmp/description.md
