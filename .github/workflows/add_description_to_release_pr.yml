@@ -31,7 +31,7 @@ jobs:
         RELEASE_DATE=$(echo $BRANCH_NAME | sed -e 's/release\///')
         echo "Release $RELEASE_DATE" > ./tmp/description.erb
         echo "<% pull_requests.each do |pr| -%>" >> ./tmp/description.erb
-        echo "<%=  pr.to_checklist_item %>" >> ./tmp/description.erb
+        echo "- #<%= pr.number %> <%= pr.mention %>" >> ./tmp/description.erb
         echo "<% end -%>" >> ./tmp/description.erb
     - run: git-pr-release
       env:
